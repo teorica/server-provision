@@ -15,18 +15,9 @@ fi
 # shellcheck source=lib/helpers.sh
 source "$HELPERS_LIB"
 
-process_job() {
-	local job_id
-	local job_file="$1" 						# Example: /full/path/to/job/file/mdk3KdAeUd
-	job_id=$(basename "$job_file")	# Example: mdk3KdAeUd
-
-	if ! is_format_ok "$job_file"; then
-		log "err" "Job file '$job_id' badly formatted. Quitting."
-		# TODO: Write to the output file so that user with this specific job
-		# knows something went wrong.
-		return 1
+for job_file in "$JOBS_IN_DIR"/*; do
+	[[ -f "$job_file" ]] || continue
+	if ! process_job "$job_file"; then
+		continue
 	fi
-	log ok "'${job_id}' has exactly ${QTY_ALLOWED_LINES} lines."
-}
-
-process_job "${JOBS_IN_DIR}/dummy_job"
+done
