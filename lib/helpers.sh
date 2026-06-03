@@ -8,7 +8,7 @@ readonly JOBS_IN_DIR="./jobs_in" 				# Jobs-in dir (written by PHP).
 readonly JOBS_OUT_DIR="./jobs_out" 			# Jobs-out dir (written by Bash).
 readonly LOGS_DIR="/var/log/provision"
 readonly LOGS_FILE="main.log"
-readonly QTY_ALLOWED_FIELDS=3
+readonly QTY_ALLOWED_LINES=3
 
 log() {
 	local level="${1:-info}"
@@ -35,6 +35,6 @@ log() {
 
 is_format_ok() {
 	local job_file="$1"
-	[ $(wc -l < "$job_file") -eq "$QTY_ALLOWED_FIELDS" ] || return 1
+	[ $(wc -l < "$job_file") -eq "$QTY_ALLOWED_LINES" ] || return 1
 	return 0
 }

@@ -26,7 +26,7 @@ process_job() {
 		# knows something went wrong.
 		return 1
 	fi
-	log ok "'${job_id}' has exactly ${QTY_ALLOWED_FIELDS} fields."
+	log ok "'${job_id}' has exactly ${QTY_ALLOWED_LINES} lines."
 }
 
 process_job "${JOBS_IN_DIR}/dummy_job"
